@@ -213,6 +213,28 @@ input{
   font-size: 13px;
   line-height: 1.4em;
 }
+input[type="submit"] {
+  background: #000;
+  border: 2px solid #e7435e;
+  color: #e7435e;
+  padding: 3px 7px 2px;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  color: #EC8D9C;
+}
+input[type="submit"]:active {
+  color: #fff;
+}
+input#keywords {
+  border: 1px solid #e7435e;
+  background: #221f1e;
+  color: #e7435e;
+  padding: 4px 7px 2px;
+}
+input#keywords:hover, input#keywords:focus {
+  background: #000;
+}
 form p.field input[type=text] {
   float: left;
   margin: 0 5px 7px 0;
