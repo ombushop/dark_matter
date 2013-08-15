@@ -465,3 +465,42 @@ div#ombu-footer {
   height: 38px;
 }
 
+/* === PAGINACION */
+.pagination {
+  clear: both;
+  margin-top: 30px;
+}
+.pagination a {
+  color: #e7435e;
+  margin: 0 3px;
+  padding: 3px 8px;
+  text-decoration: none;
+  background: #111111;
+  border: #e7435e solid 1px;
+  -webkit-transition: 200ms all;
+  -moz-transition:    200ms all;
+  -ms-transition:     200ms all;
+  -o-transition:      200ms all;
+  transition:         200ms all;
+}
+.pagination span {
+  margin: 0 3px;
+  padding: 0 5px;
+}
+.pagination a:hover {
+  color: #fff;
+}
+.pagination a:active {
+  color: #e7435e;
+}
+.pagination a.next_page {  font-weight: 700 }
+.pagination span.disabled_page {
+  color: #929292;
+}
+.pagination span.current {
+  background-color: #e7435e;
+  color: #000;
+  font-weight: 700;
+  padding: 3px 8px;
+  border: #e7435e solid 1px;
+}
