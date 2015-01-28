@@ -24,10 +24,7 @@
     <title>{{ meta_title | strip_newlines | strip_html }}</title>
 
 		<!-- Ombu Shop - Theme: Dark Matter -->
-
-		<link href='http://fonts.googleapis.com/css?family=Codystar|Bowlby+One' rel='stylesheet' type='text/css'>
-
-    <link href='/themes/dark_matter/stylesheets/reset.css' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Economica:400,700' rel='stylesheet' type='text/css'>    <link href='/themes/dark_matter/stylesheets/reset.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/basic.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/buttons.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/advice.css' rel='stylesheet' type='text/css' />
@@ -145,17 +142,7 @@
               {% endif %}
             </li>
           </ul>
-          <div id="search_bar">
-            <form accept-charset="UTF-8"
-                  action="/products" method="get">
-                <div style="margin:0;padding:0;display:inline">
-                  <input name="utf8" type="hidden" value="✓">
-                </div>
-                <label for="keywords">Buscar:</label>
-                <input id="keywords" name="keywords" type="text" value="{{ keywords }}">
-                <input type="submit" value="Buscar">
-            </form>
-          </div>
+
 
 					<!-- page navigation -->
     			<ul id="navigation_bar">
@@ -167,6 +154,18 @@
 						{% endfor %}
 					</ul>
 					<!-- end page navigation -->
+
+          <div id="search_bar">
+            <form accept-charset="UTF-8"
+            action="/products" method="get">
+            <div style="margin:0;padding:0;display:inline">
+              <input name="utf8" type="hidden" value="✓">
+            </div>
+            <label for="keywords">Buscar:</label>
+            <input id="keywords" name="keywords" type="text" value="{{ keywords }}">
+            <input type="submit" value="Buscar">
+          </form>
+        </div>
 
         </div><!-- end "header" -->
 
