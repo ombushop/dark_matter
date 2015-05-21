@@ -24,10 +24,14 @@
     <title>{{ meta_title | strip_newlines | strip_html }}</title>
 
 		<!-- Ombu Shop - Theme: Dark Matter -->
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Economica:400,700' rel='stylesheet' type='text/css'>    <link href='/themes/dark_matter/stylesheets/reset.css' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Economica:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link href='/themes/dark_matter/stylesheets/reset.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/basic.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/buttons.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/advice.css' rel='stylesheet' type='text/css' />
+    <link href='/themes/dark_matter/stylesheets/contact.css' rel='stylesheet' type='text/css' />
 
     {{ 'shop.css' | asset_url | stylesheet_tag }}
     {{ 'products.css' | asset_url | stylesheet_tag }}
@@ -55,7 +59,12 @@
 				var $container = $('.product-listing');
 				$container.imagesLoaded(function(){
 				  $container.masonry({
-				    itemSelector : '.product'
+				    itemSelector : '.product',
+            isAnimated: true,
+            isResizable: true,
+            isFitWidth: true,
+            columnWidth: 250,
+            gutter: 10
 				  });
 				});
 			});
@@ -130,6 +139,17 @@
 
       <div id="page">
         <div id="header" class="container_bg">
+          <div id="contact-info">
+            <ul>
+              <li class="facebook" title="Facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li class="pinterest" title="Pinterest"><a href="#" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
+              <li class="twitter" title="Twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li class="instagram" title="Instagram"><a href="#" target="_blank"><i class="fa fa-instagram"></i></a></li>
+              <li class="google-plus" title="Google Plus"><a href="#" target="_blank"></a></li>
+              <li class="youtube" title="Youtube"><a href="#" target="_blank"><i class="fa fa-youtube"></i></a></li>
+              <li class="phone"><i class="fa fa-phone"></i>678-678-6789</li>
+            </ul>
+          </div>
 
           {% include 'logo' %}
 
@@ -143,18 +163,6 @@
             </li>
           </ul>
 
-
-					<!-- page navigation -->
-    			<ul id="navigation_bar">
-						{% if shop.homepage %}
-						<li><a href="/products">Productos</a></li>
-						{% endif %}
-						{% for page in pages %}
-						<li {% if page.url contains current_path and current_path != "/" %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
-						{% endfor %}
-					</ul>
-					<!-- end page navigation -->
-
           <div id="search_bar">
             <form accept-charset="UTF-8"
             action="/products" method="get">
@@ -167,18 +175,63 @@
           </form>
         </div>
 
+
+					<!-- page navigation -->
+    			<ul id="navigation_bar">
+						{% if shop.homepage %}
+						<li><a href="/products">Productos</a></li>
+						{% endif %}
+						{% for page in pages %}
+						<li {% if page.url contains current_path and current_path != "/" %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
+						{% endfor %}
+					</ul>
+					<!-- end page navigation -->
+
         </div><!-- end "header" -->
 
         <div id="wrapper" class="container">
-
-          {{ content_for_layout }}
-
-					<div id="footer">
-            {{ content_for_footer }}
-            <div class="store_footer">
-              {{ shop.footer }}
+          <div id="page_content">
+            {{ content_for_layout }}
+          </div>
+          <div id="footer">
+            <div class="footer-container">
+              <div class="store_footer">
+                <div id="contact-info">
+                  <h1>Contactanos</h1>
+                  <ul>
+                    <li class="phone"><i class="fa fa-phone"></i>678-678-6789</li>
+                  </ul>
+                </div>
+                <p>{{ shop.footer }}</p>
+              </div>
             </div>
-					</div> <!-- end "footer" -->
+            <div id="footer-nav">
+              <h1>Navegación</h1>
+              <ul class="links">
+                {% if shop.homepage %}
+    						<li><a href="/products">Productos</a></li>
+    						{% endif %}
+    						{% for page in pages %}
+      					<li {% if page.url contains current_path and current_path != "/" %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
+      					{% endfor %}
+              </ul>
+            </div>
+            <div id="follow-us">
+                <h1>Seguinos</h1>
+                <div id="contact-info">
+                  <ul>
+                    <li class="facebook" title="Facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li class="pinterest" title="Pinterest"><a href="#" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
+                    <li class="twitter" title="Twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li class="instagram" title="Instagram"><a href="#" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                    <li class="google-plus" title="Google Plus"><a href="#" target="_blank"></a></li>
+                    <li class="youtube" title="Youtube"><a href="#" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                  </ul>
+              </div>
+            </div>
+            <a href="#" class="rights"><strong>OmbuShop.</strong>Tu Tienda Online</a>
+          </div>
+          <!-- end "footer" -->
         </div> <!-- end "wrapper" -->
       </div> <!-- end "page" -->
     </div> <!-- end "all" -->
