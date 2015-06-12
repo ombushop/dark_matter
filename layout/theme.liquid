@@ -181,12 +181,10 @@
 
 					<!-- page navigation -->
     			<ul id="navigation_bar">
-						{% if shop.homepage %}
-						<li><a href="/products">Productos</a></li>
-						{% endif %}
-						{% for page in pages %}
-						<li {% if page.url contains current_path and current_path != "/" %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
-						{% endfor %}
+              {% for page in pages %}
+              <li {% if (page.url contains current_path and current_path != "/") or (current_path == "/" and page.is_homepage) %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
+              {% endfor %}
+              <li {% if (current_path == "/products") %}class="current-page"{% endif %}><a href="/products">Productos</a></li>
 					</ul>
 					<!-- end page navigation -->
 
