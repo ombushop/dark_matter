@@ -6,7 +6,7 @@
 
   <ul class="navigation-list">
     <li {% if current_category == nil %} class="current root" {% endif %}>
-      <a href="/" title="Todos los productos">Catálogo</a>
+      <a href="/products" title="Todos los productos">Catálogo</a>
     </li>
   {% for category in categories %}
     <li {% if current_category.id == category.id %} class="current root" {% else %} class="root" {% endif %}>
