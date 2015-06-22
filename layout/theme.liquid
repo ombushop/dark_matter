@@ -27,13 +27,14 @@
     <link href='https://secure.ombushop.com/assets/shops/default.css' rel='stylesheet' type='text/css' />
 
 		<!-- Ombu Shop - Theme: Dark Matter -->
-
-		<link href='http://fonts.googleapis.com/css?family=Codystar|Bowlby+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Economica:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <link href='/themes/dark_matter/stylesheets/reset.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/basic.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/buttons.css' rel='stylesheet' type='text/css' />
     <link href='/themes/dark_matter/stylesheets/advice.css' rel='stylesheet' type='text/css' />
+    <link href='/themes/dark_matter/stylesheets/contact.css' rel='stylesheet' type='text/css' />
 
     {{ 'shop.css' | asset_url | stylesheet_tag }}
     {{ 'products.css' | asset_url | stylesheet_tag }}
@@ -56,15 +57,20 @@
 
     {{ content_for_header }}
 
-		<script type="text/javascript">
-			jQuery(document).ready(function(){
-				var $container = $('.product-listing');
-				$container.imagesLoaded(function(){
-				  $container.masonry({
-				    itemSelector : '.product'
-				  });
-				});
-			});
+    <script type="text/javascript">
+      jQuery(document).ready(function(){
+        var $container = $('.product-listing');
+        $container.imagesLoaded(function(){
+          $container.masonry({
+            itemSelector : '.product',
+            isAnimated: true,
+            isResizable: true,
+            isFitWidth: true,
+            columnWidth: 250,
+            gutter: 10
+          });
+        });
+      });
 		</script>
 
     {% if product %}
@@ -136,6 +142,21 @@
 
       <div id="page">
         <div id="header" class="container_bg">
+          <div id="contact-info">
+            <ul>
+              {% for social_network in social_networks %}
+                {% if social_network[0] != "phone" %}
+                  <li class="{{ social_network[0] }}"><a href="{{ social_network[1] }}" target="_blank"><i class="fa fa-{{ social_network[0] }}"></i></a></li>
+                {% endif %}
+              {% endfor %}
+
+              {% for social_network in social_networks %}
+                {% if social_network[0] == "phone" %}
+                  <li class="phone"><i class="fa fa-phone"></i> {{ social_network[1] }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
 
           {% include 'logo' %}
 
@@ -148,41 +169,77 @@
               {% endif %}
             </li>
           </ul>
+
           <div id="search_bar">
             <form accept-charset="UTF-8"
-                  action="/products" method="get">
-                <div style="margin:0;padding:0;display:inline">
-                  <input name="utf8" type="hidden" value="✓">
-                </div>
-                <label for="keywords">Buscar:</label>
-                <input id="keywords" name="keywords" type="text" value="{{ keywords }}">
-                <input type="submit" value="Buscar">
-            </form>
-          </div>
+            action="/products" method="get">
+            <div style="margin:0;padding:0;display:inline">
+              <input name="utf8" type="hidden" value="✓">
+            </div>
+            <label for="keywords">Buscar:</label>
+            <input id="keywords" name="keywords" type="text" value="{{ keywords }}">
+            <input type="submit" value="Buscar">
+          </form>
+        </div>
+
 
 					<!-- page navigation -->
     			<ul id="navigation_bar">
-						{% if shop.homepage %}
-						<li><a href="/products">Productos</a></li>
-						{% endif %}
-						{% for page in pages %}
-						<li {% if page.url contains current_path and current_path != "/" %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
-						{% endfor %}
+              {% for page in pages %}
+              <li {% if (page.url contains current_path and current_path != "/") or (current_path == "/" and page.is_homepage) %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
+              {% endfor %}
+              <li {% if (current_path == "/products") %}class="current-page"{% endif %}><a href="/products">Productos</a></li>
 					</ul>
 					<!-- end page navigation -->
 
         </div><!-- end "header" -->
 
         <div id="wrapper" class="container">
-
-          {{ content_for_layout }}
-
-					<div id="footer">
-            {{ content_for_footer }}
-            <div class="store_footer">
-              {{ shop.footer }}
+          <div id="page_content">
+            {{ content_for_layout }}
+          </div>
+          <div id="footer">
+            <div class="footer-container">
+              <div class="store_footer">
+                <div id="contact-info">
+                  <h1>Contactanos</h1>
+                  <ul>
+                    {% for social_network in social_networks %}
+                      {% if social_network[0] == "phone" %}
+                        <li class="phone"><i class="fa fa-phone"></i> {{ social_network[1] }}</li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+                <p>{{ shop.footer }}</p>
+              </div>
             </div>
-					</div> <!-- end "footer" -->
+            <div id="footer-nav">
+              <h1>Navegación</h1>
+              <ul class="links">
+                {% if shop.homepage %}
+                <li><a href="/products">Productos</a></li>
+                {% endif %}
+                {% for page in pages %}
+                <li {% if page.url contains current_path and current_path != "/" %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div id="follow-us">
+                <h1>Seguinos</h1>
+                <div id="contact-info">
+                  <ul>
+                    {% for social_network in social_networks %}
+                      {% if social_network[0] != "phone" %}
+                        <li class="{{ social_network[0] }}"><a href="{{ social_network[1] }}" target="_blank"><i class="fa fa-{{ social_network[0] }}"></i></a></li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+              </div>
+            </div>
+            <a href="http://www.ombushop.com/tu-tienda-online?utm_source=shop&utm_medium={{shop.name}}" class="ombu-tagline" title="Ombushop. Tu tienda online" target="_blank"><strong>OmbuShop.</strong>Tu Tienda Online</a>
+          </div>
+          <!-- end "footer" -->
         </div> <!-- end "wrapper" -->
       </div> <!-- end "page" -->
     </div> <!-- end "all" -->
