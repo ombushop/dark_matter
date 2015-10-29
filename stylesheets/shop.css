@@ -105,27 +105,27 @@ h2 {
 }
 h3 {
   font-weight: normal;
-  color: #222222;
-  font-size: 1.5em;
+  color: #b0967c;
+  font-size: 1.2em;
   line-height: 1;
   margin-bottom: 1em;
 }
 h4 {
   font-weight: normal;
-  color: #222222;
+  color: #b0967c;
   font-size: 1.2em;
   line-height: 1.25;
   margin-bottom: 1.25em;
 }
 h5 {
   font-weight: bold;
-  color: #222222;
+  color: #b0967c;
   font-size: 16px;
   margin-bottom: 1em;
 }
 h6 {
   font-weight: normal;
-  color: #222222;
+  color: #b0967c;
   font-size: 1em;
   font-weight: bold;
 }
