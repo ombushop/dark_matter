@@ -549,6 +549,7 @@ ul.thumbnails li.selected { border-color: #999999; }
   float: left;
   width: 380px;
   margin-right: 0px;
+  margin-left: 560px;
 }
 #product-description p{
    font-weight: 300;
