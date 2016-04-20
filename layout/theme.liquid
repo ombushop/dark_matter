@@ -118,112 +118,113 @@
 		<div id="all">
       <!-- Menú de navegación de panel de administración -->
       {{ admin_bar }}
+    </div> <!-- end "all" -->
+    
+    {% include 'flash' %}
 
-      {% include 'flash' %}
+    <div id="page">
+      <div id="header" class="container_bg">
+        <div id="contact-info">
+          <ul>
+            {% for social_network in social_networks %}
+              {% if social_network[0] != "phone" %}
+                <li class="{{ social_network[0] }}"><a href="{{ social_network[1] }}" target="_blank"><i class="fa fa-{{ social_network[0] }}"></i></a></li>
+              {% endif %}
+            {% endfor %}
 
-      <div id="page">
-        <div id="header" class="container_bg">
-          <div id="contact-info">
-            <ul>
-              {% for social_network in social_networks %}
-                {% if social_network[0] != "phone" %}
-                  <li class="{{ social_network[0] }}"><a href="{{ social_network[1] }}" target="_blank"><i class="fa fa-{{ social_network[0] }}"></i></a></li>
-                {% endif %}
-              {% endfor %}
+            {% for social_network in social_networks %}
+              {% if social_network[0] == "phone" %}
+                <li class="phone"><i class="fa fa-phone"></i> {{ social_network[1] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
 
-              {% for social_network in social_networks %}
-                {% if social_network[0] == "phone" %}
-                  <li class="phone"><i class="fa fa-phone"></i> {{ social_network[1] }}</li>
-                {% endif %}
+        {% include 'logo' %}
+
+        <ul id="cart_bar">
+          <li class="cart-indicator">
+            {% if current_order.item_count == 0 %}
+              <a href="/cart" class="empty" title="Cart">Carrito: (Vacío)</a>
+            {% else %}
+              <a href="/cart" class="full" title="Cart">Carrito: {{ current_order.item_count }}</a>
+            {% endif %}
+          </li>
+        </ul>
+
+        <div id="search_bar">
+          <form accept-charset="UTF-8"
+          action="/products" method="get">
+          <div style="margin:0;padding:0;display:inline">
+            <input name="utf8" type="hidden" value="✓">
+          </div>
+          <label for="keywords">Buscar:</label>
+          <input id="keywords" name="keywords" type="text" value="{{ keywords }}">
+          <input type="submit" value="Buscar">
+        </form>
+      </div>
+
+
+				<!-- page navigation -->
+  			<ul id="navigation_bar">
+            {% for page in pages %}
+            <li {% if (page.url contains current_path and current_path != "/") or (current_path == "/" and page.is_homepage) %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
+            {% endfor %}
+            <li {% if (current_path == "/products") %}class="current-page"{% endif %}><a href="/products">Productos</a></li>
+				</ul>
+				<!-- end page navigation -->
+
+      </div><!-- end "header" -->
+
+      <div id="wrapper" class="container">
+        <div id="page_content">
+          {{ content_for_layout }}
+        </div>
+        <div id="footer">
+          <div class="footer-container">
+            <div class="store_footer">
+              <div id="contact-info">
+                <h1>Contactanos</h1>
+                <ul>
+                  {% for social_network in social_networks %}
+                    {% if social_network[0] == "phone" %}
+                      <li class="phone"><i class="fa fa-phone"></i> {{ social_network[1] }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+              <p>{{ shop.footer }}</p>
+            </div>
+          </div>
+          <div id="footer-nav">
+            <h1>Navegación</h1>
+            <ul class="links">
+              {% if shop.homepage %}
+              <li><a href="/products">Productos</a></li>
+              {% endif %}
+              {% for page in pages %}
+              <li {% if page.url contains current_path and current_path != "/" %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
               {% endfor %}
             </ul>
           </div>
-
-          {% include 'logo' %}
-
-          <ul id="cart_bar">
-            <li class="cart-indicator">
-              {% if current_order.item_count == 0 %}
-                <a href="/cart" class="empty" title="Cart">Carrito: (Vacío)</a>
-              {% else %}
-                <a href="/cart" class="full" title="Cart">Carrito: {{ current_order.item_count }}</a>
-              {% endif %}
-            </li>
-          </ul>
-
-          <div id="search_bar">
-            <form accept-charset="UTF-8"
-            action="/products" method="get">
-            <div style="margin:0;padding:0;display:inline">
-              <input name="utf8" type="hidden" value="✓">
+          <div id="follow-us">
+              <h1>Seguinos</h1>
+              <div id="contact-info">
+                <ul>
+                  {% for social_network in social_networks %}
+                    {% if social_network[0] != "phone" %}
+                      <li class="{{ social_network[0] }}"><a href="{{ social_network[1] }}" target="_blank"><i class="fa fa-{{ social_network[0] }}"></i></a></li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
             </div>
-            <label for="keywords">Buscar:</label>
-            <input id="keywords" name="keywords" type="text" value="{{ keywords }}">
-            <input type="submit" value="Buscar">
-          </form>
+          </div>
+          <a href="http://www.ombushop.com/tu-tienda-online?utm_source=shop&utm_medium={{shop.name}}" class="ombu-tagline" title="OmbuShop. Tu tienda online" target="_blank"><strong>OmbuShop.</strong>Tu Tienda Online</a>
         </div>
+        <!-- end "footer" -->
+      </div> <!-- end "wrapper" -->
+    </div> <!-- end "page" -->
 
-
-					<!-- page navigation -->
-    			<ul id="navigation_bar">
-              {% for page in pages %}
-              <li {% if (page.url contains current_path and current_path != "/") or (current_path == "/" and page.is_homepage) %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
-              {% endfor %}
-              <li {% if (current_path == "/products") %}class="current-page"{% endif %}><a href="/products">Productos</a></li>
-					</ul>
-					<!-- end page navigation -->
-
-        </div><!-- end "header" -->
-
-        <div id="wrapper" class="container">
-          <div id="page_content">
-            {{ content_for_layout }}
-          </div>
-          <div id="footer">
-            <div class="footer-container">
-              <div class="store_footer">
-                <div id="contact-info">
-                  <h1>Contactanos</h1>
-                  <ul>
-                    {% for social_network in social_networks %}
-                      {% if social_network[0] == "phone" %}
-                        <li class="phone"><i class="fa fa-phone"></i> {{ social_network[1] }}</li>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                </div>
-                <p>{{ shop.footer }}</p>
-              </div>
-            </div>
-            <div id="footer-nav">
-              <h1>Navegación</h1>
-              <ul class="links">
-                {% if shop.homepage %}
-                <li><a href="/products">Productos</a></li>
-                {% endif %}
-                {% for page in pages %}
-                <li {% if page.url contains current_path and current_path != "/" %}class="current-page"{% endif %}><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
-                {% endfor %}
-              </ul>
-            </div>
-            <div id="follow-us">
-                <h1>Seguinos</h1>
-                <div id="contact-info">
-                  <ul>
-                    {% for social_network in social_networks %}
-                      {% if social_network[0] != "phone" %}
-                        <li class="{{ social_network[0] }}"><a href="{{ social_network[1] }}" target="_blank"><i class="fa fa-{{ social_network[0] }}"></i></a></li>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-              </div>
-            </div>
-            <a href="http://www.ombushop.com/tu-tienda-online?utm_source=shop&utm_medium={{shop.name}}" class="ombu-tagline" title="OmbuShop. Tu tienda online" target="_blank"><strong>OmbuShop.</strong>Tu Tienda Online</a>
-          </div>
-          <!-- end "footer" -->
-        </div> <!-- end "wrapper" -->
-      </div> <!-- end "page" -->
-    </div> <!-- end "all" -->
     <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
     {{ content_for_footer }}
   </body>
