@@ -620,3 +620,12 @@ div#ombu-footer {
   padding: 3px 8px;
   border: #fff solid 1px;
 }
+
+/* === CATEGORIES */
+.parent_category {
+  font-weight: 500 !important;
+}
+.children_list {
+  margin-left: 0.5em !important;
+  text-transform: uppercase;
+}
