@@ -10,7 +10,7 @@
       </ul>
     {% endunless %}
   </div>
-      
+
 </div>
 
 <div id="content" class="index">
@@ -19,7 +19,7 @@
     {{ breadcrumbs }}
   {% endif %}
 
-  {% paginate products by 12 %}  
+  {% paginate products by 12 %}
 
     {% if products.size > 0 %}
       {% if keywords != nil %}
@@ -33,15 +33,20 @@
 							<div>
 	              {% assign image = product.featured_image %}
 	              {% if image == nil %}
-	                <a href="/products/{{ product.to_param }}" class="image-link-container"><img alt="No image" src="/images/noimage/product.jpg" /></a>                    
+	                <a href="/products/{{ product.to_param }}" class="image-link-container"><img alt="No image" src="/images/noimage/product.jpg" /></a>
 	              {% else %}
-	                <a href="/products/{{ product.to_param }}" class="image-link-container"><img alt="{{ image.alt }}" src="{{ image.src }}" /></a>          
+	                <a href="/products/{{ product.to_param }}" class="image-link-container"><img alt="{{ image.alt }}" src="{{ image.src }}" /></a>
 	              {% endif %}
 
 								<div class="product-info">
 		              <h4 class="product-name"><a href="/products/{{ product.to_param }}">{{ product.name }}</a></h4>
-		              <p class="product-price"><a href="/products/{{ product.to_param }}">{{ product.price_with_currency }}</a></p>
-								
+                  {% if current_user.is_wholesale? == true %}
+                    {% assign product_price_with_currency = product.wholesale_price_with_currency %}
+                  {% else %}
+                    {% assign product_price_with_currency = product.price_with_currency %}
+                  {% endif %}
+		              <p class="product-price"><a href="/products/{{ product.to_param }}">{{ product_price_with_currency }}</a></p>
+
 									<div class="social-container">
 										<div class="fb-like-container">
 											<!-- facebook like button -->
@@ -55,7 +60,7 @@
 										</div>
 									<div>
 								</div>
-								
+
 							</div>
             </li>
           {% endif %}
@@ -66,11 +71,11 @@
     {% endif %}
 
     <hr class="space" />
-  
+
     <div class="pagination">
       {{ paginate | default_pagination }}
     </div>
-  
+
   {% endpaginate %}
-  
+
 </div><!-- end "content" -->
